@@ -411,18 +411,29 @@
 <script>
     document.getElementById("register-form").addEventListener("submit", function (event) {
         event.preventDefault(); // Evita el envío normal del formulario
+        console.log("Formulario enviado. Capturando datos...");
 
         // Obtén los datos del formulario
         const form = event.target;
         const formData = new FormData(form);
+
+        // Mostrar los datos enviados en la consola
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
 
         // Envía los datos al Web App usando fetch
         fetch(form.action, {
             method: "POST",
             body: formData,
         })
-        .then((response) => response.text())
+        .then((response) => {
+            console.log("Respuesta del servidor recibida:", response);
+            return response.text();
+        })
         .then((text) => {
+            console.log("Texto de respuesta del servidor:", text);
+
             // Mostrar el mensaje de confirmación
             Swal.fire({
                 title: "¡Éxito!",
@@ -436,16 +447,17 @@
         })
         .catch((error) => {
             // Maneja cualquier error
+            console.error("Error al enviar el formulario:", error);
             Swal.fire({
                 title: "Error",
                 text: "Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.",
                 icon: "error",
                 confirmButtonText: "Aceptar",
             });
-            console.error("Error al enviar el formulario:", error);
         });
     });
 </script>
+
 
                     
                     
