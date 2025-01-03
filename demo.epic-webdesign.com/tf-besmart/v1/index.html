@@ -393,52 +393,60 @@
                     <!--end success message -->
                     
                     <!--begin register form -->
-                    <form id="register-form" class="register" action="https://script.google.com/macros/s/AKfycbzpQ6UC9mqVI0fgkMeNyHAk_GHL_PkUGHtkw1SgN9GKGdq-k6UxN5YHJPSEKgmr--ZVNw/exec" method="POST">
-                        <div class="col-md-6 no-padding-left">
-                            <input class="register-input white-input" required="" name="register_names" placeholder="Nombre completo*" type="text">
-                            <input class="register-input white-input" required="" name="register_phone" placeholder="Teléfono*" type="text">
-                        </div>
-                        <div class="col-md-6 no-padding-left">
-                            <input class="register-input white-input" required="" name="register_email" placeholder="Correo electrónico*" type="email">
-                            <input class="register-input white-input" required="" name="register_company" placeholder="Empresa*" type="text">
-                        </div>
-                        <input class="register-input white-input" required="" name="register_position" placeholder="Puesto o Rol*" type="text">
+                    <!-- Formulario adaptado -->
+<form id="register-form" class="register" action="https://script.google.com/macros/s/AKfycbwx9YduBr6yQD0LWh_fN7nZLycnhSFIWMxbGViAFTFfXTR9-FlQBje1_AdnE9CnKo9X-g/exec" method="POST">
+    <div class="col-md-6 no-padding-left">
+        <input class="register-input white-input" required name="register_names" placeholder="Nombre completo*" type="text">
+        <input class="register-input white-input" required name="register_phone" placeholder="Teléfono*" type="text">
+    </div>
+    <div class="col-md-6 no-padding-left">
+        <input class="register-input white-input" required name="register_email" placeholder="Correo electrónico*" type="email">
+        <input class="register-input white-input" required name="register_company" placeholder="Empresa*" type="text">
+    </div>
+    <input class="register-input white-input" required name="register_position" placeholder="Puesto o Rol*" type="text">
+    <input value="¡Regístrate ahora!" class="register-submit" type="submit">
+</form>
+
                     
-                        <input value="¡Regístrate ahora!" class="register-submit" type="submit">
-                    </form>
-                    
-                    <script>
-                        document.getElementById("register-form").addEventListener("submit", function (event) {
-                            event.preventDefault();
-                    
-                            const form = event.target;
-                            const formData = new FormData(form);
-                    
-                            fetch(form.action, {
-                                method: "POST",
-                                body: formData,
-                            })
-                            .then((response) => response.text())
-                            .then((text) => {
-                                Swal.fire({
-                                    title: "¡Éxito!",
-                                    text: "Tu solicitud ha sido enviada correctamente.",
-                                    icon: "success",
-                                    confirmButtonText: "Aceptar",
-                                });
-                                form.reset();
-                            })
-                            .catch((error) => {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: "Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.",
-                                    icon: "error",
-                                    confirmButtonText: "Aceptar",
-                                });
-                                console.error("Error al enviar el formulario:", error);
-                            });
-                        });
-                    </script>
+<script>
+    document.getElementById("register-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita el envío normal del formulario
+
+        // Obtén los datos del formulario
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Envía los datos al Web App usando fetch
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.text())
+        .then((text) => {
+            // Mostrar el mensaje de confirmación
+            Swal.fire({
+                title: "¡Éxito!",
+                text: "Tu solicitud ha sido enviada correctamente.",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+            });
+
+            // Limpia el formulario después de enviar
+            form.reset();
+        })
+        .catch((error) => {
+            // Maneja cualquier error
+            Swal.fire({
+                title: "Error",
+                text: "Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+            });
+            console.error("Error al enviar el formulario:", error);
+        });
+    });
+</script>
+
                     
                     
                                          
