@@ -16,6 +16,7 @@
     <link href="css/fontawesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!-- Loading Template CSS -->
@@ -319,7 +320,7 @@
                     
                     <i class="fa fa-calendar"></i>
                     
-                    <p class="fun-facts-title"><span class="facts-numbers">9 de enero de 2025</span><br>Fecha</p>
+                    <p class="fun-facts-title"><span class="facts-numbers">9 de enero</span><br>Fecha</p>
                     
                 </div>
                 <!--end fun-facts-box -->
@@ -392,32 +393,54 @@
                     <!--end success message -->
                     
                     <!--begin register form -->
-                    <form id="register-form" class="register" action="" method="post">
-                        
-                        <!--begin col-md-6-->
+                    <form id="register-form" class="register" action="YOUR_SCRIPT_URL" method="POST">
                         <div class="col-md-6 no-padding-left">
-                
                             <input class="register-input white-input" required="" name="register_names" placeholder="Nombre completo*" type="text">
                             <input class="register-input white-input" required="" name="register_phone" placeholder="Teléfono*" type="text">
-                                                       
                         </div>
-                        <!--end col-md-6-->
-                        
-                        <!--begin col-md-6-->
                         <div class="col-md-6 no-padding-left">
-                        
                             <input class="register-input white-input" required="" name="register_email" placeholder="Correo electrónico*" type="email">
                             <input class="register-input white-input" required="" name="register_company" placeholder="Empresa*" type="text">
                         </div>
-                        <!--end col-md-6-->
                         <input class="register-input white-input" required="" name="register_position" placeholder="Puesto o Rol*" type="text">
-
-                
+                    
                         <input value="¡Regístrate ahora!" class="register-submit" type="submit">
-                            
                     </form>
-                    <!--end register form -->
-                      
+                    
+                    <script>
+                        document.getElementById("register-form").addEventListener("submit", function (event) {
+                            event.preventDefault();
+                    
+                            const form = event.target;
+                            const formData = new FormData(form);
+                    
+                            fetch(form.action, {
+                                method: "POST",
+                                body: formData,
+                            })
+                            .then((response) => response.text())
+                            .then((text) => {
+                                Swal.fire({
+                                    title: "¡Éxito!",
+                                    text: "Tu solicitud ha sido enviada correctamente.",
+                                    icon: "success",
+                                    confirmButtonText: "Aceptar",
+                                });
+                                form.reset();
+                            })
+                            .catch((error) => {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.",
+                                    icon: "error",
+                                    confirmButtonText: "Aceptar",
+                                });
+                                console.error("Error al enviar el formulario:", error);
+                            });
+                        });
+                    </script>
+                    
+                    
                                          
                 </div>
                 <!--end col-sm-6-->
@@ -512,7 +535,7 @@
                         <!--begin service-inner-->
                         <div class="services-text">
                             <h4>¿Puedo invitar a colegas?</h4>
-                            <p>Sí, comparte este link con ellos: [LINK]</p>
+                            <p>Sí, comparte este link con ellos:</p>
                         </div>
                         <!--end service-inner-->
                         
